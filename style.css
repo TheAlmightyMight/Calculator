@@ -1,0 +1,27 @@
+*{
+    margin: 0,
+    padding: 0,
+    list-style: none;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Style reset */
+
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
