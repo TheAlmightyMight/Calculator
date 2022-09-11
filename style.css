@@ -34,6 +34,7 @@ select {
   height: 450px;
   display: flex;
   flex-direction: column;
+  padding: 8px;
   border: 1px solid black;
   border-radius: 20px;
 }
@@ -41,13 +42,20 @@ select {
 .output {
   height: 100px;
   width: 100%;
+  border: 2px solid green;
+  border-radius: inherit;
+}
+
+.output__input {
+  height: 100%;
+  border-radius: inherit;
 }
 
 .keyboard {
   width: 100%;
   height: 400px;
+  margin-top: 8px;
   display: grid;
-  padding: 4px;
   gap: 4px;
   grid-template-rows: repeat(6, 1fr);
   grid-template-columns: repeat(4, 1fr);
