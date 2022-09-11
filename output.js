@@ -110,11 +110,7 @@ function evaluate(arr, s) {
           break;
       }
     }
-    resultArray.push({
-      str: sum,
-      start: s.indexOf(arr[k]),
-      end: s.indexOf(arr[k]) + arr[k].length,
-    });
+    resultArray.push(sum);
   }
 
   return resultArray;
@@ -128,8 +124,12 @@ function calculate(s) {
     priorityOperations = evaluate(arr, s);
 
     for (let i = 0; i < priorityOperations.length; i++) {
-      finalString = finalString.replace(arr[i], priorityOperations[i].str);
+      finalString = finalString.replace(arr[i], priorityOperations[i]);
     }
+  }
+
+  if (arr.join("") === s) {
+    return finalString;
   }
 
   const operations = finalString.match(/[+-]/g);
@@ -152,5 +152,6 @@ function calculate(s) {
 
 //TODOS:
 //Fix calculate function to output a more precise integer
-//Fix calculate function to not output undefined/NaN with if given 0 with / or * operator
+//Fix calculate function to not output undefined/NaN if given 0 with / or * operator
 //Properly validate calculate function input to give an error if it is not correct
+//Fix calculate function to not throw an error if no + - operation was provided <-- Done !
