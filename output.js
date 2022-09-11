@@ -1,5 +1,6 @@
 const output = document.querySelector(".output__input");
 const keyboard = document.getElementById("keyboard");
+const sqrt = document.getElementById("sqrt");
 
 keyboard.addEventListener("click", function (e) {
   switch (e.target.textContent) {
@@ -80,7 +81,9 @@ keyboard.addEventListener("click", function (e) {
       break;
     }
     case "x^2": {
-      console.log(e.target);
+      //   if(){
+
+      //   }
       break;
     }
     case "C": {
@@ -89,6 +92,11 @@ keyboard.addEventListener("click", function (e) {
     }
     default:
       return;
+  }
+  if (!/^\d*$/g.test(output.textContent)) {
+    sqrt.setAttribute("disabled", true);
+  } else {
+    sqrt.removeAttribute("disabled");
   }
 });
 
