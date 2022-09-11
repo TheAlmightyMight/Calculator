@@ -4,71 +4,79 @@ const keyboard = document.getElementById("keyboard");
 keyboard.addEventListener("click", function (e) {
   switch (e.target.textContent) {
     case "1": {
-      console.log(e.target);
+      output.textContent = output.textContent + "1";
       break;
     }
     case "2": {
-      console.log(e.target);
+      output.textContent = output.textContent + "2";
       break;
     }
     case "3": {
-      console.log(e.target);
+      output.textContent = output.textContent + "3";
       break;
     }
     case "4": {
-      console.log(e.target);
+      output.textContent = output.textContent + "4";
       break;
     }
     case "5": {
-      console.log(e.target);
+      output.textContent = output.textContent + "5";
       break;
     }
     case "6": {
-      console.log(e.target);
+      output.textContent = output.textContent + "6";
       break;
     }
     case "7": {
-      console.log(e.target);
+      output.textContent = output.textContent + "7";
       break;
     }
     case "8": {
-      console.log(e.target);
+      output.textContent = output.textContent + "8";
       break;
     }
     case "9": {
-      console.log(e.target);
+      output.textContent = output.textContent + "9";
       break;
     }
     case "0": {
-      console.log(e.target);
+      output.textContent = output.textContent + "0";
       break;
     }
     case ".": {
-      console.log(e.target);
+      output.textContent = output.textContent + ".";
       break;
     }
     case "=": {
-      console.log(e.target);
+      //   const reg = /^((\d+[+-/*])(\d+[+-/*])+)(\d+)$/gi;
+      let str = output.textContent;
+      if (str.length <= 20) {
+        console.log("nay", str);
+        output.textContent = calculate(str);
+      }
+      //   output.textContent = "";
+      console.log("yay");
       break;
     }
     case "+": {
-      console.log(e.target);
+      output.textContent = output.textContent + "+";
       break;
     }
     case "-": {
-      console.log(e.target);
+      output.textContent = output.textContent + "-";
       break;
     }
     case "*": {
-      console.log(e.target);
+      output.textContent = output.textContent + "*";
       break;
     }
     case "/": {
-      console.log(e.target);
+      output.textContent = output.textContent + "/";
       break;
     }
     case "delete": {
-      console.log(e.target);
+      let s = output.textContent;
+      output.textContent = s.slice(0, s.length - 1);
       break;
     }
     case "x^2": {
@@ -76,10 +84,73 @@ keyboard.addEventListener("click", function (e) {
       break;
     }
     case "C": {
-      console.log(e.target);
+      output.textContent = "";
       break;
     }
     default:
       return;
   }
 });
+
+function evaluate(arr, s) {
+  const reg = /[*/]/gi;
+  const resultArray = [];
+  for (let k = 0; k < arr.length; k++) {
+    const values = arr[k].split(/[*/]/);
+    const operations = arr[k].match(reg);
+    let sum = values[0];
+
+    for (let i = 0; i < operations.length; i++) {
+      switch (operations[i]) {
+        case "*":
+          sum = sum * values[i + 1];
+          break;
+        case "/":
+          sum = sum / values[i + 1];
+          break;
+      }
+    }
+    resultArray.push({
+      str: sum,
+      start: s.indexOf(arr[k]),
+      end: s.indexOf(arr[k]) + arr[k].length,
+    });
+  }
+
+  return resultArray;
+}
+
+function calculate(s) {
+  const arr = s.match(/(\d+[/*]\d+([/*]\d+)*)/gi);
+  let priorityOperations;
+  let finalString = s;
+  if (arr) {
+    priorityOperations = evaluate(arr, s);
+
+    for (let i = 0; i < priorityOperations.length; i++) {
+      finalString = finalString.replace(arr[i], priorityOperations[i].str);
+    }
+  }
+
+  const operations = finalString.match(/[+-]/g);
+  const operands = finalString.match(/\d+/g);
+  let result = Number(operands[0]);
+
+  for (let i = 0; i < operations.length; i++) {
+    switch (operations[i]) {
+      case "+":
+        result = result + Number(operands[i + 1]);
+        break;
+      case "-":
+        result = result - operands[i + 1];
+        break;
+    }
+  }
+
+  return result;
+}
+
+//TODOS:
+//Fix calculate function to output a more precise integer
+//Fix calculate function to not output undefined/NaN with if given 0 with / or * operator
+//Properly validate calculate function input to give an error if it is not correct
