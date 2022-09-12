@@ -49,14 +49,12 @@ keyboard.addEventListener("click", function (e) {
       break;
     }
     case "=": {
-      //   const reg = /^((\d+[+-/*])(\d+[+-/*])+)(\d+)$/gi;
       let str = output.textContent;
       if (str.length <= 20) {
-        console.log("nay", str);
         output.textContent = calculate(str);
+      } else {
+        output.textContent = "Exceeding allowed limit of calculation length";
       }
-      //   output.textContent = "";
-      console.log("yay");
       break;
     }
     case "+": {
@@ -81,9 +79,7 @@ keyboard.addEventListener("click", function (e) {
       break;
     }
     case "x^2": {
-      //   if(){
-
-      //   }
+      output.textContent = Math.sqrt(Number(output.textContent));
       break;
     }
     case "C": {
@@ -125,6 +121,9 @@ function evaluate(arr, s) {
 }
 
 function calculate(s) {
+  if (/(\/(?=0))|(0(?=\/))/g.test(s)) {
+    return "Cannot divide by zero";
+  }
   const arr = s.match(/(\d+[/*]\d+([/*]\d+)*)/gi);
   let priorityOperations;
   let finalString = s;
@@ -160,6 +159,6 @@ function calculate(s) {
 
 //TODOS:
 //Fix calculate function to output a more precise integer
-//Fix calculate function to not output undefined/NaN if given 0 with / or * operator
-//Properly validate calculate function input to give an error if it is not correct
+//Fix calculate function to not output undefined/NaN if given 0 with / operator <-- Done
+//Properly validate calculate function input to give an error if it is not correct <-- Done
 //Fix calculate function to not throw an error if no + - operation was provided <-- Done !
