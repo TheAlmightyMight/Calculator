@@ -98,21 +98,22 @@ keyboard.addEventListener("click", function (e) {
   }
 });
 
-function evaluate(arr, s) {
+function evaluate(arr) {
   const reg = /[*/]/gi;
   const resultArray = [];
   for (let k = 0; k < arr.length; k++) {
     const values = arr[k].split(/[*/]/);
     const operations = arr[k].match(reg);
-    let sum = values[0];
+    let sum = parseFloat(values[0]);
+    console.log(values);
 
     for (let i = 0; i < operations.length; i++) {
       switch (operations[i]) {
         case "*":
-          sum = sum * values[i + 1];
+          sum = sum * parseFloat(values[i + 1]);
           break;
         case "/":
-          sum = sum / values[i + 1];
+          sum = sum / parseFloat(values[i + 1]);
           break;
       }
     }
@@ -126,7 +127,7 @@ function calculate(s) {
   if (/(\/(?=0))|(0(?=\/))/g.test(s)) {
     return "Cannot divide by zero";
   }
-  const arr = s.match(/(\d+[/*]\d+([/*]\d+)*)/gi);
+  const arr = s.match(/(\d+(\.\d+)?[/*]\d+(\.\d+)?([/*]\d+(\.\d+)?)*)/g);
   let priorityOperations;
   let finalString = s;
   if (arr) {
@@ -135,6 +136,7 @@ function calculate(s) {
     for (let i = 0; i < priorityOperations.length; i++) {
       finalString = finalString.replace(arr[i], priorityOperations[i]);
     }
+    console.log(arr, priorityOperations);
     if (arr.join("") === s) {
       return finalString;
     }
@@ -142,15 +144,15 @@ function calculate(s) {
 
   const operations = finalString.match(/[+-]/g);
   const operands = finalString.match(/\d+/g);
-  let result = Number(operands[0]);
+  let result = parseFloat(operands[0]);
 
   for (let i = 0; i < operations.length; i++) {
     switch (operations[i]) {
       case "+":
-        result = result + Number(operands[i + 1]);
+        result = result + parseFloat(operands[i + 1]);
         break;
       case "-":
-        result = result - operands[i + 1];
+        result = result - parseFloat(operands[i + 1]);
         break;
     }
   }
@@ -160,4 +162,4 @@ function calculate(s) {
 
 //TODOS:
 //Fix calculate function to output a more precise integer
-//Fix calculate function to work with floats
+//Fix calculate function to work with floats <-- Done
