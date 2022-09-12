@@ -47,14 +47,13 @@ keyboard.addEventListener("click", function (e) {
       break;
     }
     case ".": {
-      if (/(\d+\.)$/g.test(output.textContent)) {
+      if (output.textContent.length === 0) {
         return;
-      } else if (
-        output.textContent.length === 0 ||
-        /\.$/g.test(output.textContent)
-      ) {
+      } else if (/\.$/g.test(output.textContent)) {
         return;
-      } else if (/[+-/*](\d+\.\d+)$/g.test(output.textContent)) {
+      } else if (/^(\d+\.\d+?)$/g.test(output.textContent)) {
+        return;
+      } else if (/(\d*[+-/*])$|[+-/*](\d+\.\d+)$/g.test(output.textContent)) {
         return;
       } else {
         output.textContent = output.textContent + ".";
@@ -92,7 +91,14 @@ keyboard.addEventListener("click", function (e) {
       break;
     }
     case "x^2": {
-      output.textContent = Math.sqrt(Number(output.textContent));
+      if (output.textContent === "") {
+        return;
+      } else if (output.textContent === "0") {
+        output.textContent = "Cannot do that";
+        return;
+      }
+      console.log(Math.sqrt(parseFloat(output.textContent)));
+      output.textContent = Math.sqrt(parseFloat(output.textContent)); //should floats spit out an error?
       break;
     }
     case "C": {
