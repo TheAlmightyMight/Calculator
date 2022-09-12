@@ -159,7 +159,3 @@ function calculate(s) {
 
   return result;
 }
-
-//TODOS:
-//Fix calculate function to output a more precise integer <--Done
-//Fix calculate function to work with floats <-- Done
