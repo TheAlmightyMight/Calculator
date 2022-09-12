@@ -1,5 +1,8 @@
+import calculateWrapper from "./calculateWrapper.js";
+
 const output = document.querySelector(".output__input");
 const keyboard = document.getElementById("keyboard");
+const sqrt = document.getElementById("sqrt");
 
 keyboard.addEventListener("click", function (e) {
   switch (e.target.textContent) {
@@ -48,14 +51,12 @@ keyboard.addEventListener("click", function (e) {
       break;
     }
     case "=": {
-      //   const reg = /^((\d+[+-/*])(\d+[+-/*])+)(\d+)$/gi;
       let str = output.textContent;
       if (str.length <= 20) {
-        console.log("nay", str);
-        output.textContent = calculate(str);
+        output.textContent = calculateWrapper(calculate, str);
+      } else {
+        output.textContent = "Exceeding allowed limit of calculation length";
       }
-      //   output.textContent = "";
-      console.log("yay");
       break;
     }
     case "+": {
@@ -80,7 +81,7 @@ keyboard.addEventListener("click", function (e) {
       break;
     }
     case "x^2": {
-      console.log(e.target);
+      output.textContent = Math.sqrt(Number(output.textContent));
       break;
     }
     case "C": {
@@ -90,59 +91,68 @@ keyboard.addEventListener("click", function (e) {
     default:
       return;
   }
+  if (!/^\d*$/g.test(output.textContent)) {
+    sqrt.setAttribute("disabled", true);
+  } else {
+    sqrt.removeAttribute("disabled");
+  }
 });
 
-function evaluate(arr, s) {
+function evaluate(arr) {
   const reg = /[*/]/gi;
   const resultArray = [];
   for (let k = 0; k < arr.length; k++) {
     const values = arr[k].split(/[*/]/);
     const operations = arr[k].match(reg);
-    let sum = values[0];
+    let sum = parseFloat(values[0]);
+    console.log(values);
 
     for (let i = 0; i < operations.length; i++) {
       switch (operations[i]) {
         case "*":
-          sum = sum * values[i + 1];
+          sum = sum * parseFloat(values[i + 1]);
           break;
         case "/":
-          sum = sum / values[i + 1];
+          sum = sum / parseFloat(values[i + 1]);
           break;
       }
     }
-    resultArray.push({
-      str: sum,
-      start: s.indexOf(arr[k]),
-      end: s.indexOf(arr[k]) + arr[k].length,
-    });
+    resultArray.push(sum);
   }
 
   return resultArray;
 }
 
 function calculate(s) {
-  const arr = s.match(/(\d+[/*]\d+([/*]\d+)*)/gi);
+  if (/[+-/*]0\//g.test(s)) {
+    return "Cannot divide by zero";
+  }
+  const arr = s.match(/(\d+(\.\d+)?[/*]\d+(\.\d+)?([/*]\d+(\.\d+)?)*)/g);
   let priorityOperations;
   let finalString = s;
   if (arr) {
     priorityOperations = evaluate(arr, s);
 
     for (let i = 0; i < priorityOperations.length; i++) {
-      finalString = finalString.replace(arr[i], priorityOperations[i].str);
+      finalString = finalString.replace(arr[i], priorityOperations[i]);
+    }
+    console.log(arr, priorityOperations);
+    if (arr.join("") === s) {
+      return finalString;
     }
   }
 
   const operations = finalString.match(/[+-]/g);
   const operands = finalString.match(/\d+/g);
-  let result = Number(operands[0]);
+  let result = parseFloat(operands[0]);
 
   for (let i = 0; i < operations.length; i++) {
     switch (operations[i]) {
       case "+":
-        result = result + Number(operands[i + 1]);
+        result = result + parseFloat(operands[i + 1]);
         break;
       case "-":
-        result = result - operands[i + 1];
+        result = result - parseFloat(operands[i + 1]);
         break;
     }
   }
@@ -151,6 +161,5 @@ function calculate(s) {
 }
 
 //TODOS:
-//Fix calculate function to output a more precise integer
-//Fix calculate function to not output undefined/NaN with if given 0 with / or * operator
-//Properly validate calculate function input to give an error if it is not correct
+//Fix calculate function to output a more precise integer <--Done
+//Fix calculate function to work with floats <-- Done
