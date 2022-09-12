@@ -124,7 +124,7 @@ function evaluate(arr) {
 }
 
 function calculate(s) {
-  if (/(\/(?=0))|(0(?=\/))/g.test(s)) {
+  if (/[+-/*]0\//g.test(s)) {
     return "Cannot divide by zero";
   }
   const arr = s.match(/(\d+(\.\d+)?[/*]\d+(\.\d+)?([/*]\d+(\.\d+)?)*)/g);
@@ -161,5 +161,5 @@ function calculate(s) {
 }
 
 //TODOS:
-//Fix calculate function to output a more precise integer
+//Fix calculate function to output a more precise integer <--Done
 //Fix calculate function to work with floats <-- Done
