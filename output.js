@@ -63,10 +63,10 @@ keyboard.addEventListener("click", function (e) {
     }
     case "=": {
       let str = output.textContent;
-      if (str.length <= 20) {
+      if (str.length <= 30) {
         output.textContent = calculateWrapper(calculate, str);
       } else {
-        output.textContent = "Exceeding allowed limit of calculation length";
+        output.textContent = "Allowed limit of calculation length is exceeded";
       }
       break;
     }
