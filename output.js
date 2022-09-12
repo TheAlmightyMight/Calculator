@@ -51,7 +51,7 @@ keyboard.addEventListener("click", function (e) {
     case "=": {
       let str = output.textContent;
       if (str.length <= 20) {
-        output.textContent = calculate(str);
+        output.textContent = calculateWrapper(calculate, str);
       } else {
         output.textContent = "Exceeding allowed limit of calculation length";
       }
@@ -133,10 +133,9 @@ function calculate(s) {
     for (let i = 0; i < priorityOperations.length; i++) {
       finalString = finalString.replace(arr[i], priorityOperations[i]);
     }
-  }
-
-  if (arr.join("") === s) {
-    return finalString;
+    if (arr.join("") === s) {
+      return finalString;
+    }
   }
 
   const operations = finalString.match(/[+-]/g);
@@ -156,6 +155,29 @@ function calculate(s) {
 
   return result;
 }
+
+function calculateWrapper(cb, str) {
+  const calculationResult = cb(str);
+  if (!sessionStorage.getItem("Calculations")) {
+    const array = [calculationResult];
+    sessionStorage.setItem("Calculations", JSON.stringify(array));
+  } else {
+    const previousCalculations = JSON.parse(
+      sessionStorage.getItem("Calculations")
+    );
+    previousCalculations.push(calculationResult);
+    sessionStorage.setItem(
+      "Calculations",
+      JSON.stringify(previousCalculations)
+    );
+
+    console.log(typeof previousCalculations);
+  }
+
+  return calculationResult;
+}
+
+// sessionStorage.setItem("yay", JSON.stringify([1, 2, 3, 4, 5, 6]));
 
 //TODOS:
 //Fix calculate function to output a more precise integer
