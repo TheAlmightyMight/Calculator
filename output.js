@@ -1,3 +1,5 @@
+import calculateWrapper from "./calculateWrapper.js";
+
 const output = document.querySelector(".output__input");
 const keyboard = document.getElementById("keyboard");
 const sqrt = document.getElementById("sqrt");
@@ -156,31 +158,6 @@ function calculate(s) {
   return result;
 }
 
-function calculateWrapper(cb, str) {
-  const calculationResult = cb(str);
-  if (!sessionStorage.getItem("Calculations")) {
-    const array = [calculationResult];
-    sessionStorage.setItem("Calculations", JSON.stringify(array));
-  } else {
-    const previousCalculations = JSON.parse(
-      sessionStorage.getItem("Calculations")
-    );
-    previousCalculations.push(calculationResult);
-    sessionStorage.setItem(
-      "Calculations",
-      JSON.stringify(previousCalculations)
-    );
-
-    console.log(typeof previousCalculations);
-  }
-
-  return calculationResult;
-}
-
-// sessionStorage.setItem("yay", JSON.stringify([1, 2, 3, 4, 5, 6]));
-
 //TODOS:
 //Fix calculate function to output a more precise integer
-//Fix calculate function to not output undefined/NaN if given 0 with / operator <-- Done
-//Properly validate calculate function input to give an error if it is not correct <-- Done
-//Fix calculate function to not throw an error if no + - operation was provided <-- Done !
+//Fix calculate function to work with floats
