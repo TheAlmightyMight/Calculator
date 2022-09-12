@@ -6,13 +6,9 @@
 
 body {
   margin: 0;
-  background: rgb(2, 0, 36);
-  background: linear-gradient(
-    90deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(28, 72, 170, 1) 50%,
-    rgba(0, 212, 255, 1) 100%
-  );
+  background: hsl(268, 75%, 9%);
+  color: hsl(52, 100%, 62%);
+  font-family: "League Spartan", sans-serif;
 }
 
 input,
@@ -37,24 +33,29 @@ select {
 }
 
 .calculator {
-  width: 320px;
+  width: 400px;
   height: 450px;
   display: flex;
   flex-direction: column;
-  padding: 8px;
-  border: 1px solid black;
   border-radius: 20px;
 }
 
 .output {
   height: 100px;
   width: 100%;
-  border: 2px solid green;
+  background: hsl(268, 71%, 12%);
   border-radius: inherit;
+  color: inherit;
+  margin-bottom: 1rem;
 }
 
 .output__input {
-  text-align: right;
+  padding-right: 1.5rem;
+  font-family: inherit;
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
   height: 100%;
   border-radius: inherit;
 }
@@ -64,21 +65,51 @@ select {
   height: 400px;
   margin-top: 8px;
   display: grid;
-  gap: 4px;
+  gap: 8px;
   grid-template-rows: repeat(6, 1fr);
   grid-template-columns: repeat(4, 1fr);
-}
-
-.keyboard__item {
-  border: 1px solid blue;
+  background: hsl(268, 71%, 12%);
+  padding: 1rem;
   border-radius: 20px;
 }
 
-.keyboard__item:nth-child(3) {
-  grid-column: 3/5;
+.keyboard__item {
+  cursor: pointer;
+  color: inherit;
+  font-size: 32px;
+  background: hsl(268, 47%, 21%);
+  border-radius: 20px;
+  border: none;
+}
+
+.keyboard__item:hover {
+  background: hsl(290, 70%, 30%);
+  transition: 0.3s linear;
+}
+
+.keyboard__item:nth-child(1) {
+  background: hsl(281, 89%, 26%);
+}
+
+.keyboard__item:nth-child(1):hover {
+  background: hsl(285, 91%, 52%);
+}
+
+.keyboard__item:nth-child(4) {
+  background: hsl(281, 89%, 26%);
+}
+
+.keyboard__item:nth-child(4):hover {
+  background: hsl(285, 91%, 52%);
 }
 
 .equal {
   grid-column: 4/5;
   grid-row: 3/7;
+  background: hsl(176, 100%, 44%);
+}
+
+.equal:hover {
+  background: hsl(177, 92%, 70%);
+  transition: 0.3s linear;
 }

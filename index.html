@@ -5,24 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="style.css" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&display=swap"
+      rel="stylesheet"
+    />
     <title>Document</title>
   </head>
   <body>
     <div class="app container">
       <section class="container calculator">
-        <header class="output calculator">
+        <header class="output">
           <div class="output__input"></div>
         </header>
 
         <main class="keyboard" id="keyboard">
           <button class="keyboard__item container">C</button>
           <button class="keyboard__item container" id="sqrt">x^2</button>
-          <button class="keyboard__item container">delete</button>
+          <button class="keyboard__item container">%</button>
+          <button class="keyboard__item container">DEL</button>
 
           <!-- first half of tool panel -->
 
           <button class="keyboard__item container">/</button>
-          <button class="keyboard__item container">*</button>
+          <button class="keyboard__item container">x</button>
           <button class="keyboard__item container">+</button>
           <button class="keyboard__item container">-</button>
 
@@ -50,6 +55,7 @@
           <button class="keyboard__item equal">=</button>
         </main>
       </section>
+      <section class="history"> </section>
     </div>
     <script type="module" src="output.js"></script>
   </body>
