@@ -47,7 +47,18 @@ keyboard.addEventListener("click", function (e) {
       break;
     }
     case ".": {
-      output.textContent = output.textContent + ".";
+      if (/(\d+\.)$/g.test(output.textContent)) {
+        return;
+      } else if (
+        output.textContent.length === 0 ||
+        /\.$/g.test(output.textContent)
+      ) {
+        return;
+      } else if (/[+-/*](\d+\.\d+)$/g.test(output.textContent)) {
+        return;
+      } else {
+        output.textContent = output.textContent + ".";
+      }
       break;
     }
     case "=": {
@@ -75,7 +86,7 @@ keyboard.addEventListener("click", function (e) {
       output.textContent = output.textContent + "/";
       break;
     }
-    case "delete": {
+    case "DEL": {
       let s = output.textContent;
       output.textContent = s.slice(0, s.length - 1);
       break;
@@ -105,7 +116,6 @@ function evaluate(arr) {
     const values = arr[k].split(/[*/]/);
     const operations = arr[k].match(reg);
     let sum = parseFloat(values[0]);
-    console.log(values);
 
     for (let i = 0; i < operations.length; i++) {
       switch (operations[i]) {
@@ -124,6 +134,7 @@ function evaluate(arr) {
 }
 
 function calculate(s) {
+  if (s.length === 0) return;
   if (/[+-/*]0\//g.test(s)) {
     return "Cannot divide by zero";
   }
@@ -136,14 +147,14 @@ function calculate(s) {
     for (let i = 0; i < priorityOperations.length; i++) {
       finalString = finalString.replace(arr[i], priorityOperations[i]);
     }
-    console.log(arr, priorityOperations);
     if (arr.join("") === s) {
       return finalString;
     }
   }
 
   const operations = finalString.match(/[+-]/g);
-  const operands = finalString.match(/\d+/g);
+  const operands = finalString.match(/\d+(\.\d+)?/g);
+  console.log(operands);
   let result = parseFloat(operands[0]);
 
   for (let i = 0; i < operations.length; i++) {
@@ -159,3 +170,7 @@ function calculate(s) {
 
   return result;
 }
+
+//Floats with +- don't work
+//Truncate output
+//limit length of the input per integer
