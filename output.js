@@ -14,7 +14,7 @@ const validateNumber = (str) => {
 };
 
 const validateOperator = (str, symbol) => {
-  const reg = /(^[+/*-])/g;
+  const reg = /(^[+\/*-])|\.[+\/*-]$/g;
   if (reg.test(str + symbol) || /[+\-*/]$/g.test(str[str.length - 1])) {
     return;
   } else {
@@ -123,6 +123,10 @@ keyboard.addEventListener("click", function (e) {
       break;
     }
     case "%": {
+      let str = output.textContent + "%";
+      if (/^%|[+-/*]%/g.test(str)) {
+        return;
+      }
       output.textContent = output.textContent + "%";
       break;
     }
