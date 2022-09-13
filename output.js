@@ -4,6 +4,24 @@ const output = document.querySelector(".output__input");
 const keyboard = document.getElementById("keyboard");
 const sqrt = document.getElementById("sqrt");
 
+const validateNumber = (str) => {
+  const reg = /(\d+(\.\d+)?)$|([+-/*])$/g;
+  if (reg.test(str)) {
+    return false;
+  } else {
+    return true;
+  }
+};
+
+const validateOperator = (str, symbol) => {
+  const reg = /(^[+/*-])/g;
+  if (reg.test(str + symbol) || /[+\-*/]$/g.test(str[str.length - 1])) {
+    return;
+  } else {
+    output.textContent = str + symbol;
+  }
+};
+
 keyboard.addEventListener("click", function (e) {
   switch (e.target.textContent) {
     case "1": {
@@ -70,19 +88,23 @@ keyboard.addEventListener("click", function (e) {
       break;
     }
     case "+": {
-      output.textContent = output.textContent + "+";
+      let temp = output.textContent;
+      validateOperator(temp, "+");
       break;
     }
     case "-": {
-      output.textContent = output.textContent + "-";
+      let temp = output.textContent;
+      validateOperator(temp, "-");
       break;
     }
-    case "*": {
-      output.textContent = output.textContent + "*";
+    case "x": {
+      let temp = output.textContent;
+      validateOperator(temp, "*");
       break;
     }
     case "/": {
-      output.textContent = output.textContent + "/";
+      let temp = output.textContent;
+      validateOperator(temp, "/");
       break;
     }
     case "DEL": {
