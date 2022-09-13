@@ -119,8 +119,11 @@ keyboard.addEventListener("click", function (e) {
         output.textContent = "Cannot do that";
         return;
       }
-      console.log(Math.sqrt(parseFloat(output.textContent)));
       output.textContent = Math.sqrt(parseFloat(output.textContent)); //should floats spit out an error?
+      break;
+    }
+    case "%": {
+      output.textContent = output.textContent + "%";
       break;
     }
     case "C": {
@@ -129,11 +132,6 @@ keyboard.addEventListener("click", function (e) {
     }
     default:
       return;
-  }
-  if (!/^\d*$/g.test(output.textContent)) {
-    sqrt.setAttribute("disabled", true);
-  } else {
-    sqrt.removeAttribute("disabled");
   }
 });
 
@@ -181,17 +179,25 @@ function calculate(s) {
   }
 
   const operations = finalString.match(/[+-]/g);
-  const operands = finalString.match(/\d+(\.\d+)?/g);
+  const operands = finalString.match(/\d+(\.\d+)?%?/g);
   console.log(operands);
   let result = parseFloat(operands[0]);
 
   for (let i = 0; i < operations.length; i++) {
     switch (operations[i]) {
       case "+":
-        result = result + parseFloat(operands[i + 1]);
+        if (operands[i + 1].includes("%")) {
+          result = result + (result / 100) * parseFloat(operands[i + 1]);
+        } else {
+          result = result + parseFloat(operands[i + 1]);
+        }
         break;
       case "-":
-        result = result - parseFloat(operands[i + 1]);
+        if (operands[i + 1].includes("%")) {
+          result = result - (result / 100) * parseFloat(operands[i + 1]);
+        } else {
+          result = result - parseFloat(operands[i + 1]);
+        }
         break;
     }
   }
