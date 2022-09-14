@@ -37,6 +37,8 @@
           <button class="keyboard__item container">2</button>
           <button class="keyboard__item container">3</button>
 
+          <!-- first keyboard half -->
+
           <button class="keyboard__item container">4</button>
           <button class="keyboard__item container">5</button>
           <button class="keyboard__item container">6</button>
@@ -48,15 +50,20 @@
           <button class="keyboard__item container">9</button>
 
           <!-- third keyboard half -->
-
-          <button class="keyboard__item container"></button>
+          <button id="openModal" class="keyboard__item open-btn container"
+            ><img src="./-history_89998.svg"
+          /></button>
           <button class="keyboard__item container">0</button>
           <button class="keyboard__item container">.</button>
           <button class="keyboard__item equal">=</button>
         </main>
       </section>
-      <section class="history"> </section>
+
+      <section id="modal" class="history hidden">
+        <button class="close-btn" id="closeModal">X</button>
+      </section>
     </div>
     <script type="module" src="output.js"></script>
+    <script src="modal.js"></script>
   </body>
 </html>

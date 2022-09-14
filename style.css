@@ -30,6 +30,7 @@ select {
 
 .app {
   height: 100vh;
+  position: relative;
 }
 
 .calculator {
@@ -112,4 +113,30 @@ select {
 .equal:hover {
   background: hsl(177, 92%, 70%);
   transition: 0.3s linear;
+}
+
+.history {
+  width: 400px;
+  height: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: hsl(185, 42%, 37%);
+  overflow-y: scroll;
+}
+
+.close-btn {
+  text-align: center;
+  background: none;
+  font-size: 2rem;
+  color: red;
+  width: 50px;
+  aspect-ratio: 1;
+  border: none;
+  border-radius: 50%;
+}
+
+.hidden {
+  display: none;
 }
