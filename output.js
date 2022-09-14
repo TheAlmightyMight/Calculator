@@ -160,7 +160,7 @@ function evaluate(arr) {
 
 function calculate(s) {
   if (s.length === 0) return;
-  if (/[+-/*]0\//g.test(s)) {
+  if (/(0\/)|(\/0)/g.test(s)) {
     return "Cannot divide by zero";
   }
   const arr = s.match(/(\d+(\.\d+)?[/*]\d+(\.\d+)?([/*]\d+(\.\d+)?)*)/g);
