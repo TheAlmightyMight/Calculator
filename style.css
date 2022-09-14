@@ -126,6 +126,11 @@ select {
   overflow-y: scroll;
 }
 
+.modal__header {
+  display: flex;
+  justify-content: center;
+}
+
 .close-btn {
   text-align: center;
   background: none;
@@ -135,8 +140,16 @@ select {
   aspect-ratio: 1;
   border: none;
   border-radius: 50%;
+  position: absolute;
+  top: 8px;
+  left: 5px;
 }
 
 .hidden {
   display: none;
+}
+
+p {
+  font-size: 1.5rem;
+  margin-left: 1rem;
 }

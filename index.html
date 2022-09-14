@@ -51,7 +51,7 @@
 
           <!-- third keyboard half -->
           <button id="openModal" class="keyboard__item open-btn container"
-            ><img src="./-history_89998.svg"
+            ><img src="./history_89998.svg"
           /></button>
           <button class="keyboard__item container">0</button>
           <button class="keyboard__item container">.</button>
@@ -60,7 +60,11 @@
       </section>
 
       <section id="modal" class="history hidden">
-        <button class="close-btn" id="closeModal">X</button>
+        <header class="modal__header">
+          <button class="close-btn" id="closeModal">X</button>
+          <h2>Your history:</h2>
+        </header>
+        <div class="modal__output"></div>
       </section>
     </div>
     <script type="module" src="output.js"></script>
