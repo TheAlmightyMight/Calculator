@@ -13,50 +13,54 @@ const validateOperator = (str, symbol) => {
   }
 };
 
-// const validateNumber = (str) => {
-//   const reg = //
-// }
+const validateNumber = (str, symbol) => {
+  if (/%$/g.test(str)) {
+    return;
+  } else {
+    output.textContent = output.textContent + symbol;
+  }
+};
 
 keyboard.addEventListener("click", function (e) {
   switch (e.target.textContent) {
     case "1": {
-      output.textContent = output.textContent + "1";
+      validateNumber(output.textContent, "1");
       break;
     }
     case "2": {
-      output.textContent = output.textContent + "2";
+      validateNumber(output.textContent, "2");
       break;
     }
     case "3": {
-      output.textContent = output.textContent + "3";
+      validateNumber(output.textContent, "3");
       break;
     }
     case "4": {
-      output.textContent = output.textContent + "4";
+      validateNumber(output.textContent, "4");
       break;
     }
     case "5": {
-      output.textContent = output.textContent + "5";
+      validateNumber(output.textContent, "5");
       break;
     }
     case "6": {
-      output.textContent = output.textContent + "6";
+      validateNumber(output.textContent, "6");
       break;
     }
     case "7": {
-      output.textContent = output.textContent + "7";
+      validateNumber(output.textContent, "7");
       break;
     }
     case "8": {
-      output.textContent = output.textContent + "8";
+      validateNumber(output.textContent, "8");
       break;
     }
     case "9": {
-      output.textContent = output.textContent + "9";
+      validateNumber(output.textContent, "9");
       break;
     }
     case "0": {
-      output.textContent = output.textContent + "0";
+      validateNumber(output.textContent, "0");
       break;
     }
     case ".": {
@@ -66,7 +70,7 @@ keyboard.addEventListener("click", function (e) {
         return;
       } else if (/^(\d+\.\d+?)$/g.test(output.textContent)) {
         return;
-      } else if (/(\d*[+-/*])$|[+-/*](\d+\.\d+)$/g.test(output.textContent)) {
+      } else if (/(\d*[+-/*%])$|[+-/*](\d+\.\d+)$/g.test(output.textContent)) {
         return;
       } else {
         output.textContent = output.textContent + ".";
@@ -119,7 +123,9 @@ keyboard.addEventListener("click", function (e) {
     }
     case "%": {
       let str = output.textContent + "%";
-      console.log("yay");
+      if (/^(\d+(\.\d+)?)$/g.test(output.textContent)) {
+        return;
+      }
       if (/([+-/*](\d+(\.\d+)?))$/g.test(output.textContent)) {
         output.textContent = str;
       }
@@ -179,7 +185,6 @@ function calculate(s) {
 
   const operations = finalString.match(/[+-]/g);
   const operands = finalString.match(/\d+(\.\d+)?%?/g);
-  console.log(operands);
   let result = parseFloat(operands[0]);
 
   for (let i = 0; i < operations.length; i++) {
@@ -203,7 +208,3 @@ function calculate(s) {
 
   return result;
 }
-
-//Floats with +- don't work
-//Truncate output
-//limit length of the input per integer
