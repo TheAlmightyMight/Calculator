@@ -11,9 +11,10 @@ openBtn.addEventListener("click", (e) => {
   modal.classList.remove("hidden");
   modalOut.innerHTML = "";
   const calcs = JSON.parse(sessionStorage.getItem("Calculations"));
+  const operations = JSON.parse(sessionStorage.getItem("Operations"));
   calcs.forEach((el, i) => {
     const elem = document.createElement("p");
-    elem.textContent = el;
+    elem.textContent = operations[i] + " " + "=" + " " + el;
     modalOut.append(elem);
   });
 });
