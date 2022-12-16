@@ -1,4 +1,4 @@
-<h1>JS intensive calculator app 🙌🏻</h1>
+<h1> Almighty Calculator </h1>
 
 <h3><b>О проекте:</b></h3>
 <ul>
