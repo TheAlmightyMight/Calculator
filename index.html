@@ -2,14 +2,23 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="style.css" rel="stylesheet" />
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="IE=edge"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <link
+      href="./styles/style.css"
+      rel="stylesheet"
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&display=swap"
       rel="stylesheet"
     />
-    <title>Document</title>
+    <title>Almighty calculator</title>
   </head>
   <body>
     <div class="app container">
@@ -18,9 +27,16 @@
           <div class="output__input"></div>
         </header>
 
-        <main class="keyboard" id="keyboard">
+        <main
+          class="keyboard"
+          id="keyboard"
+        >
           <button class="keyboard__item container">C</button>
-          <button class="keyboard__item container" id="sqrt">x^2</button>
+          <button
+            class="keyboard__item container"
+            id="sqrt"
+            >x^2</button
+          >
           <button class="keyboard__item container">%</button>
           <button class="keyboard__item container">DEL</button>
 
@@ -50,8 +66,10 @@
           <button class="keyboard__item container">9</button>
 
           <!-- third keyboard half -->
-          <button id="openModal" class="keyboard__item open-btn container"
-            ><img src="./history_89998.svg"
+          <button
+            id="openModal"
+            class="keyboard__item open-btn container"
+            ><img src="./assets/history_89998.svg"
           /></button>
           <button class="keyboard__item container">0</button>
           <button class="keyboard__item container">.</button>
@@ -59,15 +77,25 @@
         </main>
       </section>
 
-      <section id="modal" class="history hidden">
+      <section
+        id="modal"
+        class="history hidden"
+      >
         <header class="modal__header">
-          <button class="close-btn" id="closeModal">X</button>
+          <button
+            class="close-btn"
+            id="closeModal"
+            >X</button
+          >
           <h2>Your history:</h2>
         </header>
         <div class="modal__output"></div>
       </section>
     </div>
-    <script type="module" src="output.js"></script>
-    <script src="modal.js"></script>
+    <script
+      type="module"
+      src="./js/output.js"
+    ></script>
+    <script src="./js/modal.js"></script>
   </body>
 </html>
